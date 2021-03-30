@@ -144,9 +144,7 @@ p {
 
  <div>
   <p>
-   Click on the conflict areas highlighted 
-   
-    in orange for further information.
+   Political disorder events in Ethiopia (1 April 2018 - Present)
         
   </p></div>
 </div>
@@ -170,7 +168,7 @@ p {
 
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/acled/ckmfc7zkv0z4217mr5t5opk4g', 
+style: 'mapbox://styles/acled/ckmv7sgp809o617tf9guxz974', 
 center: [40.23987, 9.08579],
 zoom: 5.35,
 dragPan: false,
@@ -178,7 +176,7 @@ dragPan: false,
 });
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-1'] // replace this with the name of the layer
+    layers: ['ethiopia-regions-3'] // replace this with the name of the layer
   });
 
   if (!features.length) {
@@ -193,11 +191,11 @@ dragPan: false,
     .addTo(map);
     });
   var hoveredStateId = null;
-  
+  map.doubleClickZoom.disable();
   map.scrollZoom.disable();
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-1'] // replace this with the name of the layer
+    layers: ['ethiopia-regions-3'] // replace this with the name of the layer
   });
 
   if (!features.length) {
@@ -224,7 +222,7 @@ dragPan: false,
 
         map.addSource('Ethiopia_conflict_polygon', {
             'type': 'vector',
-            'url': 'mapbox://acled.ckm5a3k5q0d2e22o2gwx39jdx-5b5b5',
+            'url': 'mapbox://acled.ckm5a3k5q0d2e22o2gwx39jdx-1664b',
       
         });
         // Add layer from source - if source is a tileset add parameter for 'source-layer' which is a layer name in the Tileset not the Style
@@ -253,7 +251,7 @@ dragPan: false,
             'id': 'conflict-polygon',
             'type': 'fill',
             'source': 'Ethiopia_conflict_polygon',
-            'source-layer':'Ethiopia_Conflict_Zones_1',
+            'source-layer':'Ethiopia_Conflict_Zones_2',
             'layout': {},
             'paint': {
                 'fill-color': '#97451c',
@@ -342,11 +340,11 @@ map.on('mousemove', 'hover-polygon', function (e) {
      
         });
     
-           map.on('mouseenter', 'ethiopia-regions-1', function () {
+           map.on('mouseenter', 'ethiopia-regions-3', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
-        map.on('mouseleave', 'ethiopia-regions-1', function () {
+        map.on('mouseleave', 'ethiopia-regions-3', function () {
             map.getCanvas().style.cursor = '';
      
         });
