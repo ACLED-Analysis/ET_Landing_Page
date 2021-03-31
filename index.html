@@ -30,7 +30,7 @@ p {
 }
 	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
       
-  .legend {
+    .legend {
         background-color: #fff;
         border-radius: 3px;
         bottom: 30px;
@@ -81,11 +81,11 @@ p {
   
   /* added some Popup styling */
 
- .mapboxgl-popup {
+   .mapboxgl-popup {
       padding-bottom: 5px;
         }
 
-.mapboxgl-popup-close-button {
+  .mapboxgl-popup-close-button {
         display: none;
         }
 
@@ -143,18 +143,17 @@ p {
   <div id="instructions" class="notes">
 
  <div>
-  <p>
-   Political disorder events in Ethiopia (1 April 2018 - Present)
+  <p><h4>
+   Political Violence Events in Ethiopia (1 April 2018 - 26 March 2021)
         
-  </p></div>
+   </h4></p></div>
 </div>
 <div id="event-legend" class="legend">
     <h4>Event Type</h4>
     <div><span style="background-color: #c95200"></span>Battles</div>
     <div><span style="background-color: #ffbb7a"></span>Explosions/Remote violence</div>
-    <div><span style="background-color: #a2c8ec"></span>Violence against civilians</div>
-    <div><span style="background-color: #0d657d"></span>Protests</div>
-    <div><span style="background-color: #ff7f0e"></span>Riots</div>
+    <div><span style="background-color: #0d657d"></span>Violence against civilians</div>
+  
 </div>
 <div id="size-scale" class="map-overlay">
  <div>
@@ -212,7 +211,7 @@ dragPan: false,
   
   var hoveredStateId = null;
   
-  map.on('load', function () {
+        map.on('load', function () {
         // addSource for a Studio tileset use 'vector' and use url with tileset ID formatted as described in https://docs.mapbox.com/mapbox-gl-js/style-spec/sources#vector 
         //since we are using feature state for hover, need to have an 'id' field or add promoteID https://docs.mapbox.com/mapbox-gl-js/style-spec/sources#vector-promoteId
         map.addSource('Ethiopia_Conflict_Zones', {
@@ -235,7 +234,7 @@ dragPan: false,
             'source-layer':'eth_admbnda_adm1_csa_bofed_20-6kok5f',
             'layout': {},
             'paint': {
-                'fill-color': '#2f82ac',
+                'fill-color': '#ff7f0e',
                 'fill-outline-color': '#000000',
                 'fill-opacity': [
                   'case',
@@ -254,13 +253,13 @@ dragPan: false,
             'source-layer':'Ethiopia_Conflict_Zones_2',
             'layout': {},
             'paint': {
-                'fill-color': '#97451c',
+                'fill-color': '#a2c8ec',
                 'fill-outline-color': '#000000',
                 'fill-opacity': [
                   'case',
                   ['boolean', ['feature-state', 'hover'], false],
-                      0.7,
-                     0.3
+                      0.8,
+                     0.4
                   ]
             }
 
@@ -295,7 +294,7 @@ dragPan: false,
         }
         hoveredStateId = null;
         });
-map.on('mousemove', 'hover-polygon', function (e) {
+      map.on('mousemove', 'hover-polygon', function (e) {
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
