@@ -166,6 +166,8 @@
    Organized Political Violence in Ethiopia 
   </h4></p> 
   <p>(1 April 2018 - 2 April 2021)
+  </p><br><p>
+  Click on shaded conflict areas or region names</p><p> for further information about conflict patterns.
   </p></div>
 </div>
 <div id="event-legend" class="legend">
@@ -187,7 +189,7 @@
 
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/acled/ckn6tas0b0nbc17ljtw3xvb1q', 
+style: 'mapbox://styles/acled/ckn7z5vzm0prj17pnr14cc394', 
 center: [40.23987, 9.08579],
 zoom: 5.35,
 dragPan: false,
@@ -209,6 +211,24 @@ dragPan: false,
     .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Description + '</p><p><a href="' + feature.properties.URL + '" target="_blank">' + 'Read More</p>')
     .addTo(map);
     });
+  var hoveredStateId = null;
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['ethiopia-regions-4'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Description + '</p>')
+    .addTo(map);
+    });
+  
   var hoveredStateId = null;
   map.doubleClickZoom.disable();
   map.scrollZoom.disable();
@@ -365,6 +385,15 @@ dragPan: false,
         });
 
         map.on('mouseleave', 'ethiopia-regions-3', function () {
+            map.getCanvas().style.cursor = '';
+     
+        });
+        
+          map.on('mouseenter', 'ethiopia-regions-4', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', 'ethiopia-regions-4', function () {
             map.getCanvas().style.cursor = '';
      
         });
