@@ -10,6 +10,7 @@ Find out more [about Glitch](https://glitch.com/about).
 
 Your Project
 ------------
+Ethiopia Interactive Map
 
 ### ← README.md
 
