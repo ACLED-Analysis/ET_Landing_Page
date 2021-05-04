@@ -8,29 +8,50 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
 <style>
 	body { margin: 0; padding: 0; }
-   h2,
-h3 {
+  h2,
+  h3 {
   margin: 10px;
   font-size: 1.2em;
-}
+  }
 
-h3 {
-  font-size: 1em;
-}
-
-h4 {
+  h3 {
   font-size: 1em;
   text-align: center;
-}
+  }
+
+  h4 {
+  font-size: 1em;
+  text-align: center;
+  }
   
-p {
+  p {
   font-size: 0.85em;
   margin: 10px;
-  text-align: left;
-}
+  text-align: center;
+  }
+  /* the following css script (beginnning with a:) controls the style of hyperlinks. All controls are currently set to blue*/
+  a:link {
+  color: blue;
+  }
+
+  /* visited link */
+  a:visited {
+  color: blue;
+  }
+
+  /* mouse over link */
+  a:hover {
+  color: blue;
+  }
+
+  /* selected link */
+  a:active {
+  color: blue;
+  }
+ 
 	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-      
-  .legend {
+         /*.legend class refers to the map's Event Type legend*/   
+        .legend {
         background-color: #fff;
         border-radius: 3px;
         bottom: 30px;
@@ -40,32 +61,33 @@ p {
         position: absolute;
         right: 20px;
         z-index: 1;
-    }
-
-    .legend h4 {
+        }
+        .legend h4 {
         margin: 0 0 5px;
-    }
-
-    .legend div span {
+        }
+        .legend div span {
         border-radius: 50%;
         display: inline-block;
         height: 10px;
         margin-right: 5px;
         width: 10px;
-    }
-    .map-overlay {
+        }
+        /*.map-overlay class refers to the map's size scale element. This is actually a static image that has been added to the assets folder and imported as an overlay element*/
+        .map-overlay {
         background-color: #fff;
         border-radius: 3px;
-        bottom: 200px;
+        bottom: 150px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         font: 18px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         padding: 0px;
         position: absolute;
         right: 20px;
         z-index: 1;
-    }
-   .notes {
+        }
+        /*.notes class refers to the text box that includes the title, date range, and explanatory text*/
+        .notes {
         position: absolute;
+        display: inline-block;
 	      right: 20px;
       	float: right;
         background-color: #fff;
@@ -74,21 +96,15 @@ p {
         font: 18px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         padding: 10px;
         top: 10px;
-        
         z-index: 1;
-    }
-
-  
-  /* added some Popup styling */
-
- .mapboxgl-popup {
-      padding-bottom: 5px;
         }
-
-.mapboxgl-popup-close-button {
+        /* .mapboxgl-popup classes allow for popup styling */
+        .mapboxgl-popup {
+        padding-bottom: 5px;
+        }
+        .mapboxgl-popup-close-button {
         display: none;
         }
-
         .mapboxgl-popup-content {
         font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
         padding: 0;
@@ -96,7 +112,6 @@ p {
               max-height: 250px;
               overflow: auto;
         }
-
         .mapboxgl-popup-content-wrapper {
           padding: 1%;
         }
@@ -124,59 +139,68 @@ p {
         cursor: pointer;
         }
 
-    .mapboxgl-popup-content div {
+        .mapboxgl-popup-content div {
         padding: 10px;
+      
         }
 
-    .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
-      margin-top: 3px;
-    }
+        .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+        margin-top: 3px;
+        }
 
-    .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-      border-bottom-color: #47d61b;
-    }
+        .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+        border-bottom-color: #47d61b;
+        }
 </style>
 </head>
 <body>
 <div id="map"></div>
+/*This div is where you can modify what will appear in the text box that currently displays title, date range, instructions etc. */
   
-  <div id="instructions" class="notes">
-
- <div>
-  <p>
-   Political disorder events in Ethiopia (1 April 2018 - Present)
-        
+<div id="instructions" class="notes">
+<div>
+  <p><h4>
+   Organized Political Violence in Ethiopia 
+  </h4></p> 
+  <p>(2 April 2018 - 30 April 2021)
+  </p><br><p>
+  Click on shaded conflict areas or region names</p><p> for further information about conflict patterns.
   </p></div>
 </div>
+  /*This div is where you can modify the colors and text displayed in the Event Type legend*/
 <div id="event-legend" class="legend">
     <h4>Event Type</h4>
     <div><span style="background-color: #c95200"></span>Battles</div>
     <div><span style="background-color: #ffbb7a"></span>Explosions/Remote violence</div>
-    <div><span style="background-color: #a2c8ec"></span>Violence against civilians</div>
-    <div><span style="background-color: #0d657d"></span>Protests</div>
-    <div><span style="background-color: #ff7f0e"></span>Riots</div>
+    <div><span style="background-color: #0d657d"></span>Violence against civilians</div>
+  
 </div>
+  /*This div is where you can import the size scale static image*/
+   /*Use the img src= [hyperlink] code to display the image */
 <div id="size-scale" class="map-overlay">
  <div>
   <p>
 <img src= "https://cdn.glitch.com/d8437948-f19a-4a15-ae44-ca439f513e26%2FSize%20Scale4.png?v=1616000753521">
-  </p></div>
+  </p>
+  </div>
 </div>
+  /*You'll need the Mapbox accessToken here to all for any styles created in Mapbox to be used*/
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiYWNsZWQiLCJhIjoiY2pncW50MTVwMDUzNzJycWx4YXVnamh1biJ9.azwIz4TmaBWj7MFNZX8R9g';
-// Set bounds to New York, New York
+
 
 var map = new mapboxgl.Map({
+  /*Use the style URL of the Mapbox style you want to display here. Panning has been deactivated*/
 container: 'map',
-style: 'mapbox://styles/acled/ckmv7sgp809o617tf9guxz974', 
+style: 'mapbox://styles/acled/ckngiax2406ft17mrpkppru74', 
 center: [40.23987, 9.08579],
-zoom: 5.35,
+zoom: 5.75,
 dragPan: false,
 
 });
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-3'] // replace this with the name of the layer
+    layers: ['ethiopia-regions-3'] // This is the name of the layer that displays the region name that uses a data source that includes a URL
   });
 
   if (!features.length) {
@@ -187,9 +211,27 @@ dragPan: false,
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Name + '</h3><p><a href="' + feature.properties.URL + '" target="_blank">' + 'Read more</p>')
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Description + '</p><p><a href="' + feature.properties.URL + '" target="_blank">' + 'Read More</p>')
     .addTo(map);
     });
+  var hoveredStateId = null;
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['ethiopia-regions-4'] // This is the name of the layer that displays the region name but uses a data source that doesn't include a URL
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Description + '</p>')
+    .addTo(map);
+    });
+  
   var hoveredStateId = null;
   map.doubleClickZoom.disable();
   map.scrollZoom.disable();
@@ -206,23 +248,24 @@ dragPan: false,
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Name + '</h3><p><a href="' + feature.properties.URL + '" target="_blank">' + 'Read more</p>')
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Description + '</p><p><a href="' + feature.properties.URL + '" target="_blank">' + 'Read More</p>')
     .addTo(map);
+    
     });
   
   var hoveredStateId = null;
   
-  map.on('load', function () {
+        map.on('load', function () {
         // addSource for a Studio tileset use 'vector' and use url with tileset ID formatted as described in https://docs.mapbox.com/mapbox-gl-js/style-spec/sources#vector 
         //since we are using feature state for hover, need to have an 'id' field or add promoteID https://docs.mapbox.com/mapbox-gl-js/style-spec/sources#vector-promoteId
         map.addSource('Ethiopia_Conflict_Zones', {
             'type': 'vector',
-            'url': 'mapbox://acled.2mvd11sd',
+            'url': 'mapbox://acled.dtdpui7o',
         });
 
         map.addSource('Ethiopia_conflict_polygon', {
             'type': 'vector',
-            'url': 'mapbox://acled.ckm5a3k5q0d2e22o2gwx39jdx-1664b',
+            'url': 'mapbox://acled.ckn0flpy60zw721p5bm13bdkq-8w7a7',
       
         });
         // Add layer from source - if source is a tileset add parameter for 'source-layer' which is a layer name in the Tileset not the Style
@@ -232,10 +275,10 @@ dragPan: false,
             'id': 'hover-polygon',
             'type': 'fill',
             'source': 'Ethiopia_Conflict_Zones',
-            'source-layer':'eth_admbnda_adm1_csa_bofed_20-6kok5f',
+            'source-layer':'ET_Adm1_Fixed-caorwi',
             'layout': {},
             'paint': {
-                'fill-color': '#2f82ac',
+                'fill-color': '#ff7f0e',
                 'fill-outline-color': '#000000',
                 'fill-opacity': [
                   'case',
@@ -251,16 +294,16 @@ dragPan: false,
             'id': 'conflict-polygon',
             'type': 'fill',
             'source': 'Ethiopia_conflict_polygon',
-            'source-layer':'Ethiopia_Conflict_Zones_2',
+            'source-layer':'ET_Conflict_Region_7',
             'layout': {},
             'paint': {
-                'fill-color': '#97451c',
-                'fill-outline-color': '#000000',
+                'fill-color': '#a2c8ec',
+                'fill-outline-color': '#a2c8ec',
                 'fill-opacity': [
                   'case',
                   ['boolean', ['feature-state', 'hover'], false],
-                      0.7,
-                     0.3
+                      0.8,
+                     0.4
                   ]
             }
 
@@ -272,13 +315,13 @@ dragPan: false,
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -289,23 +332,23 @@ dragPan: false,
       map.on('mouseleave', 'hover-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
             { hover: false }
           );
         }
         hoveredStateId = null;
         });
-map.on('mousemove', 'hover-polygon', function (e) {
+      map.on('mousemove', 'hover-polygon', function (e) {
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -316,7 +359,7 @@ map.on('mousemove', 'hover-polygon', function (e) {
       map.on('mouseleave', 'hover-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'eth_admbnda_adm1_csa_bofed_20-6kok5f', id: hoveredStateId },
+            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
             { hover: false }
           );
         }
@@ -326,7 +369,7 @@ map.on('mousemove', 'hover-polygon', function (e) {
         map.on('click', 'conflict-polygon', function (e) {
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
-                .setHTML('<h3>' + e.features[0].properties.Name + '</h3><p><a href="' + e.features[0].properties.URL + '" target="_blank">' + 'Read more</p>')
+                .setHTML('<h3>' + e.features[0].properties.Name + '</h3><p>' + e.features[0].properties.Description + '</p><p><a href="' + e.features[0].properties.URL + '" target="_blank">' + 'Read More</p>')
                 .addTo(map);
         });  
         
@@ -340,11 +383,20 @@ map.on('mousemove', 'hover-polygon', function (e) {
      
         });
     
-           map.on('mouseenter', 'ethiopia-regions-3', function () {
+        map.on('mouseenter', 'ethiopia-regions-3', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
         map.on('mouseleave', 'ethiopia-regions-3', function () {
+            map.getCanvas().style.cursor = '';
+     
+        });
+        
+          map.on('mouseenter', 'ethiopia-regions-4', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', 'ethiopia-regions-4', function () {
             map.getCanvas().style.cursor = '';
      
         });
@@ -354,4 +406,5 @@ map.on('mousemove', 'hover-polygon', function (e) {
 
 </body>
 </html>
+
 
