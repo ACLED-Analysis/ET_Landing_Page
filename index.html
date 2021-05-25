@@ -54,12 +54,12 @@
         .legend {
         background-color: #fff;
         border-radius: 3px;
-        bottom: 30px;
+        top: 220px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         font: 16px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        padding: 10px;
+        padding: 5px;
         position: absolute;
-        right: 20px;
+        right: 200px;
         z-index: 1;
         }
         .legend h4 {
@@ -76,7 +76,7 @@
         .map-overlay {
         background-color: #fff;
         border-radius: 3px;
-        bottom: 150px;
+        top: 220px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         font: 18px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         padding: 0px;
@@ -93,8 +93,8 @@
         background-color: #fff;
         border-radius: 3px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        font: 18px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        padding: 10px;
+        font: 20px/22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        padding: 16px;
         top: 10px;
         z-index: 1;
         }
@@ -162,9 +162,10 @@
   <p><h4>
    Organized Political Violence in Ethiopia 
   </h4></p> 
-  <p>(2 April 2018 - 7 May 2021)
-  </p><br><p>
-  Click on shaded conflict areas or region names</p><p> for further information about conflict patterns.
+  <p>(2 April 2018 - 21 May 2021)
+  </p><p>Click on shaded conflict areas or region names <br>
+
+for further information about conflict patterns.
   </p></div>
 </div>
   /*This div is where you can modify the colors and text displayed in the Event Type legend*/
@@ -173,7 +174,11 @@
     <div><span style="background-color: #c95200"></span>Battles</div>
     <div><span style="background-color: #ffbb7a"></span>Explosions/Remote violence</div>
     <div><span style="background-color: #0d657d"></span>Violence against civilians</div>
-  
+    <div>
+      <p>
+      </p>
+    </div>
+    <div><span style="background-color: #a2c8ec"></span>Conflict area</div>
 </div>
   /*This div is where you can import the size scale static image*/
    /*Use the img src= [hyperlink] code to display the image */
@@ -283,7 +288,7 @@ dragPan: false,
                 'fill-opacity': [
                   'case',
                   ['boolean', ['feature-state', 'hover'], false],
-                      0.1,
+                      0.0,
                      0.0
                   ]
               
@@ -298,11 +303,11 @@ dragPan: false,
             'layout': {},
             'paint': {
                 'fill-color': '#a2c8ec',
-                'fill-outline-color': '#a2c8ec',
+                'fill-outline-color': '#343940',
                 'fill-opacity': [
                   'case',
                   ['boolean', ['feature-state', 'hover'], false],
-                      0.8,
+                      0.4,
                      0.4
                   ]
             }
@@ -311,17 +316,17 @@ dragPan: false,
     
       // When the user moves their mouse over the polygon fill layer, we'll update the feature state for the feature under the mouse. 
       //For a tileset add sourceLayer parameter, the name of the layer in the tileset.
-      map.on('mousemove', 'hover-polygon', function (e) {
+      map.on('mousemove', 'conflict-polygon', function (e) {
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -329,26 +334,26 @@ dragPan: false,
  
     // When the mouse leaves the polygon fill layer, update the feature state of the
       // previously hovered feature.
-      map.on('mouseleave', 'hover-polygon', function () {
+      map.on('mouseleave', 'conflict-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
             { hover: false }
           );
         }
         hoveredStateId = null;
         });
-      map.on('mousemove', 'hover-polygon', function (e) {
+      map.on('mousemove', 'conflict-polygon', function (e) {
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -356,10 +361,10 @@ dragPan: false,
  
     // When the mouse leaves the polygon fill layer, update the feature state of the
       // previously hovered feature.
-      map.on('mouseleave', 'hover-polygon', function () {
+      map.on('mouseleave', 'conflict-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_Conflict_Zones', 'sourceLayer':'ET_Adm1_Fixed-caorwi', id: hoveredStateId },
+            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
             { hover: false }
           );
         }
@@ -392,7 +397,7 @@ dragPan: false,
      
         });
         
-          map.on('mouseenter', 'ethiopia-regions-4', function () {
+        map.on('mouseenter', 'ethiopia-regions-4', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
