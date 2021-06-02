@@ -162,7 +162,7 @@
   <p><h4>
    Organized Political Violence in Ethiopia 
   </h4></p> 
-  <p>(2 April 2018 - 21 May 2021)
+  <p>(2 April 2018 - 28 May 2021)
   </p><p>Click on shaded conflict areas or region names <br>
 
 for further information about conflict patterns.
@@ -178,7 +178,7 @@ for further information about conflict patterns.
       <p>
       </p>
     </div>
-    <div><span style="background-color: #a2c8ec"></span>Conflict area</div>
+    <div><span style="background-color: #5691c8"></span>Conflict area</div>
 </div>
   /*This div is where you can import the size scale static image*/
    /*Use the img src= [hyperlink] code to display the image */
@@ -197,7 +197,7 @@ for further information about conflict patterns.
 var map = new mapboxgl.Map({
   /*Use the style URL of the Mapbox style you want to display here. Panning has been deactivated*/
 container: 'map',
-style: 'mapbox://styles/acled/ckp4t8l4k2xt418pecccvyu1g', 
+style: 'mapbox://styles/acled/ckpczv6231t2417mh9l249ghp', 
 center: [40.23987, 9.08579],
 zoom: 5.75,
 dragPan: false,
@@ -205,7 +205,7 @@ dragPan: false,
 });
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-3'] // This is the name of the layer that displays the region name that uses a data source that includes a URL
+    layers: ['Region Label 2'] // This is the name of the layer that displays the region name that uses a data source that includes a URL
   });
 
   if (!features.length) {
@@ -222,7 +222,7 @@ dragPan: false,
   var hoveredStateId = null;
     map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-4'] // This is the name of the layer that displays the region name but uses a data source that doesn't include a URL
+    layers: ['Region Label 1'] // This is the name of the layer that displays the region name but uses a data source that doesn't include a URL
   });
 
   if (!features.length) {
@@ -242,7 +242,7 @@ dragPan: false,
   map.scrollZoom.disable();
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['ethiopia-regions-3'] // replace this with the name of the layer
+    layers: ['Region Label 2'] // replace this with the name of the layer
   });
 
   if (!features.length) {
@@ -270,7 +270,7 @@ dragPan: false,
 
         map.addSource('Ethiopia_conflict_polygon', {
             'type': 'vector',
-            'url': 'mapbox://acled.ckn0flpy60zw721p5bm13bdkq-8w7a7',
+            'url': 'mapbox://acled.ckm5a3k5q0d2e22o2gwx39jdx-6pt3x',
       
         });
         // Add layer from source - if source is a tileset add parameter for 'source-layer' which is a layer name in the Tileset not the Style
@@ -299,7 +299,7 @@ dragPan: false,
             'id': 'conflict-polygon',
             'type': 'fill',
             'source': 'Ethiopia_conflict_polygon',
-            'source-layer':'ET_Conflict_Region_7',
+            'source-layer':'Ethiopia_Conflict_Zone_Tile',
             'layout': {},
             'paint': {
                 'fill-color': '#a2c8ec',
@@ -320,13 +320,13 @@ dragPan: false,
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -337,7 +337,7 @@ dragPan: false,
       map.on('mouseleave', 'conflict-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
             { hover: false }
           );
         }
@@ -347,13 +347,13 @@ dragPan: false,
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
-              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
               { hover: false }
             );
           }
           hoveredStateId = e.features[0].id;
             map.setFeatureState(
-              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+              { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
               { hover: true }
             );
         }
@@ -364,7 +364,7 @@ dragPan: false,
       map.on('mouseleave', 'conflict-polygon', function () {
         if (hoveredStateId) {
           map.setFeatureState(
-            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'ET_Conflict_Region_7', id: hoveredStateId },
+            { source: 'Ethiopia_conflict_polygon', 'sourceLayer':'Ethiopia_Conflict_Zone_Tile', id: hoveredStateId },
             { hover: false }
           );
         }
@@ -388,20 +388,20 @@ dragPan: false,
      
         });
     
-        map.on('mouseenter', 'ethiopia-regions-3', function () {
+        map.on('mouseenter', 'Region Label 2', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
-        map.on('mouseleave', 'ethiopia-regions-3', function () {
+        map.on('mouseleave', 'Region Label 2', function () {
             map.getCanvas().style.cursor = '';
      
         });
         
-        map.on('mouseenter', 'ethiopia-regions-4', function () {
+        map.on('mouseenter', 'Region Label 1', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
-        map.on('mouseleave', 'ethiopia-regions-4', function () {
+        map.on('mouseleave', 'Region Label 1', function () {
             map.getCanvas().style.cursor = '';
      
         });
